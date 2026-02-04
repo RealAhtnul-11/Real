@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="app single">
+    <main class="page-content">
+      <div class="page-card">
+        <p class="eyebrow">Slides</p>
+        <h2>{{ title }}</h2>
+        <p class="subtitle">{{ subtitle }}</p>
+        <div class="page-actions">
+          <a class="cta" href="{{ url_for('index') }}">Back to feed</a>
+          <a class="pill-btn" href="{{ url_for('create_post') }}">Create a post</a>
+        </div>
+      </div>
+      <div class="page-card muted">
+        <h3>What you can do here</h3>
+        <ul>
+          <li>Browse curated black-and-white content.</li>
+          <li>Engage with creators through comments and likes.</li>
+          <li>Start your next slideshow with a single click.</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+{% endblock %}

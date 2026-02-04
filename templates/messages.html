@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="app messages-layout">
+    <aside class="messages-sidebar">
+      <div class="messages-header">
+        <div>
+          <h2>Messages</h2>
+          <p>End-to-end encrypted</p>
+        </div>
+        <a class="pill-btn" href="{{ url_for('create_post') }}">New</a>
+      </div>
+      <div class="messages-search">
+        <input type="text" placeholder="Search messages" />
+      </div>
+      <div class="conversation-list">
+        {% for convo in conversations %}
+        <button class="conversation-card" type="button">
+          <div class="avatar"></div>
+          <div class="conversation-meta">
+            <div class="conversation-top">
+              <strong>
+                {{ convo.user }}
+                {% if convo.verified %}
+                <span class="verified-badge" aria-label="Verified account">✓</span>
+                {% endif %}
+              </strong>
+              <span>{{ convo.status }}</span>
+            </div>
+            <p>{{ convo.snippet }}</p>
+          </div>
+          {% if convo.unread %}
+          <span class="unread">{{ convo.unread }}</span>
+          {% endif %}
+        </button>
+        {% endfor %}
+      </div>
+    </aside>
+
+    <main class="messages-thread">
+      <div class="thread-header">
+        <div class="thread-user">
+          <div class="avatar large"></div>
+          <div>
+            <strong>@luna_gray</strong>
+            <span>Active now · Encrypted chat</span>
+          </div>
+        </div>
+        <div class="thread-actions">
+          <a class="icon-link" href="{{ url_for('profile_detail', username='luna_gray') }}">ⓘ</a>
+          <a class="icon-link" href="{{ url_for('slides') }}">⇪</a>
+        </div>
+      </div>
+
+      <div class="thread-body">
+        <div class="encryption-banner">
+          <span>🔒 End-to-end encrypted.</span>
+          <p>Only you and @luna_gray can read these messages.</p>
+        </div>
+        {% for message in messages_feed %}
+        <div class="message-row {% if message.inbound %}inbound{% else %}outbound{% endif %}">
+          <div class="message-bubble">
+            <p>{{ message.text }}</p>
+            <span>{{ message.time }}</span>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="thread-input">
+        <button class="icon-link" type="button">＋</button>
+        <input type="text" placeholder="Message @luna_gray" />
+        <button class="pill-btn" type="button">Send</button>
+      </div>
+    </main>
+  </div>
+{% endblock %}
