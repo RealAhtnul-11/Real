@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="app single">
+    <main class="auth-panel">
+      <div class="auth-card">
+        <p class="eyebrow">Authentication</p>
+        <h2>{{ title }}</h2>
+        <p class="subtitle">{{ subtitle }}</p>
+        <form class="auth-form" method="post">
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@slides.app" required />
+          </label>
+          {% if form_type == "signup" %}
+          <label>
+            Username
+            <input type="text" name="username" placeholder="@yourhandle" required />
+          </label>
+          {% endif %}
+          <label>
+            Password
+            <input type="password" name="password" placeholder="••••••••" required />
+          </label>
+          <label class="auth-inline">
+            <input type="checkbox" name="remember" />
+            Remember this device
+          </label>
+          <button class="cta" type="submit">{{ submit_label }}</button>
+        </form>
+        <div class="auth-footer">
+          <a class="text-link" href="{{ swap_url }}">{{ swap_label }}</a>
+          <span class="auth-note">Protected with Slides secure sign-in and verification.</span>
+        </div>
+      </div>
+      <div class="auth-card muted">
+        <h3>Authentication method</h3>
+        <ul>
+          <li>Email + password with optional one-time verification code.</li>
+          <li>Device confirmation for new logins.</li>
+          <li>Encrypted sessions with auto sign-out on inactivity.</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+{% endblock %}
